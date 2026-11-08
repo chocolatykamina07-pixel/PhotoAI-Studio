@@ -1,39 +1,47 @@
 package com.photoai.studio
 
-import android.app.Activity
 import android.os.Bundle
-import android.graphics.Color
-import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class MainActivity : Activity() {
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.gravity = Gravity.CENTER
-        layout.setPadding(24, 24, 24, 24)
-        layout.setBackgroundColor(Color.rgb(20, 20, 30))
-
-        val title = TextView(this)
-        title.text = "PhotoAI Studio"
-        title.textSize = 30f
-        title.setTextColor(Color.WHITE)
-        title.gravity = Gravity.CENTER
-
-        layout.addView(title)
-
-        val subtitle = TextView(this)
-        subtitle.text = "Your AI Photo Editor"
-        subtitle.textSize = 16f
-        subtitle.setTextColor(Color.LTGRAY)
-        subtitle.gravity = Gravity.CENTER
-
-        layout.addView(subtitle)
-
-        setContentView(layout)
+        setContent {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "PhotoAI Studio",
+                        fontSize = 28.sp,
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Remini-inspired AI Photo Editor",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                    Button(onClick = { /* TODO: Pick Image */ }) {
+                        Text(text = "Select Photo")
+                    }
+                }
+            }
+        }
     }
 }
